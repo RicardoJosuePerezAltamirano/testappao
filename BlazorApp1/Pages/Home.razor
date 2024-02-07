@@ -1,0 +1,30 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@if(Productos!= null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Precio</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Productos)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Precio</td>
+                    <td>@item.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
