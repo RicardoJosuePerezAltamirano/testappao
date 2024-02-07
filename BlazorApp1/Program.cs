@@ -16,7 +16,21 @@ else
     Console.WriteLine("es blazor hosted");
 }
 builder.RootComponents.Add<HeadOutlet>("head::after");
+builder.Services.AddHttpClient("api", (sp, client) =>
+{
+    if (IsHosted)
+    {
+        Console.WriteLine("es blazor hosted -");
+        client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+    }
+    else
+    {
+        Console.WriteLine("es blazor nativo -");
+        client.BaseAddress = new Uri(builder.Configuration["api"]);
+    }
 
+
+});
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();
